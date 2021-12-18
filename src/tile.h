@@ -1,6 +1,6 @@
 #pragma once
 
-#include "pieces/piece_interface.h"
+#include "piece.h"
 
 #include <optional>
 #include <memory>
@@ -8,21 +8,14 @@
 class Tile
 {
 public:
-	bool HasPiece() const
-	{
-		return mPiece.has_value();
-	}
+	bool HasPiece();
 
-	PieceInterface* GetPiece() const
-	{
-		return &*mPiece.value();
-	}
+	Piece& GetPiece();
 
-	void SetPiece(std::unique_ptr<PieceInterface>&& piece)
-	{
-		mPiece = std::move(piece);
-	}
+	void SetPiece(Piece piece);
+
+	void RemovePiece();
 
 private:
-	std::optional<std::unique_ptr<PieceInterface>> mPiece;
+	std::optional<Piece> mPiece;
 };
